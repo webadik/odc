@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+
+<group name="irrelevant">
+
+   <group name="dirs">
+      <group name="log4j"> 
+         <!-- Please change the property name, yourAppLogDir to 
+              something meaningfull -->
+         <prop name="odc_ws">@yourAppId.log4j.odc_ws@</prop>
+         <prop name="odc">@yourAppId.log4j.odc@</prop>
+      </group>
+   </group>
+
+	<group name="log4j">
+      <group name="severity">
+	      <prop name="threshold">@logging.level@</prop>
+	       <prop name="FATAL">@log4j.severity.fatal@</prop>
+		   <prop name="ERROR">@log4j.severity.error@</prop>
+			<prop name="WARN">@log4j.severity.warn@</prop>
+			<prop name="INFO">@log4j.severity.info@</prop>
+			<prop name="DEBUG">@log4j.severity.debug@</prop>
+			<prop name="TRACE">@log4j.severity.trace@</prop>
+      </group>
+   </group>
+
+   <!-- frameworks properties -->
+   <group name="fw_props">
+      <group name="audit">
+         <prop name="maxQueueDepth">5000</prop>
+      </group>
+      <group name="performance">
+         <prop name="maxQueueDepth">5000</prop>
+      </group>
+      <group name="error">
+         <prop name="maxQueueDepth">5000</prop>
+         <prop name="errorWorkerCount">5</prop>
+         <!-- errorWorkerPeriod in milliseconds --> 
+         <prop name="errorWorkerPeriod">5000</prop>
+      </group>
+   </group>
+
+	
+   <group name="connections">
+      <!--  the default will be to use the protocol followed by the fully qualified host name and the port -->
+      <group name="servers">
+         <!-- Error, Performance and Audit frameworks properties -->
+         <prop name="readAuditSvr">@readAuditSvr@</prop>
+         <prop name="performanceAuditSvr">@performanceAuditSvr@</prop>
+      </group>
+
+      <group name="security">
+         <group name="jndiLookup">
+            <!-- 
+               This is used by fw-refresh-spring.xml of TELUS Error frameworks
+            -->
+            <group name="telus">
+               <prop name="principal">@security.jndiLookup.telus.principal@</prop>
+               <prop name="credentials">@security.jndiLookup.telus.credentials@</prop>
+            </group>
+         </group>
+      </group>
+
+      <group name="ejbServices">
+
+       	<group name="readAuditSvc">
+            <prop name="url">${connections/servers/readAuditSvr}</prop>
+            <prop name="jndiName">com.telus.framework.audit.service.db.AuditSvc</prop>
+         </group>
+
+      </group>
+
+      <group name="dataSources">
+         <prop name="InitialContextFactoryClassName">weblogic.jndi.WLInitialContextFactory</prop>
+            
+         <group name="yourAppId">
+            <prop name="jndiName">@yourAppId.dataSource@</prop>
+         </group>
+
+      </group>
+		
+      <group name="webServices">
+         <group name="yourAppId">
+            <prop name="endpointAddress">@yourAppId.webService@</prop>
+         </group>
+
+         <!-- This placeholder is for Reference PDS's endpoint
+         <group name="refpds">
+            <prop name="endpointAddress">@refpds.webService@</prop>
+         </group>
+         -->
+      </group>
+
+   </group>
+</group>
+

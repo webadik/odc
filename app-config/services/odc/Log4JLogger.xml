@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+
+<group name="irrelevant">
+	<group name="logging">
+		<prop name="log4j.rootCategory">WARN, CONSOLE</prop>
+		<prop name="log4j.debug">true</prop>
+
+		<prop name="log4j.appender.CONSOLE">org.apache.log4j.ConsoleAppender</prop>
+		<prop name="log4j.appender.CONSOLE.Threshold">TRACE</prop>
+		<prop name="log4j.appender.CONSOLE.layout">org.apache.log4j.PatternLayout</prop>
+		<prop name="log4j.appender.CONSOLE.layout.ConversionPattern">[%d{DATE} %c %t %-5p]- %m%n%n</prop>
+
+		<!-- should use this appender, FILE for EJB -->
+		<prop name="log4j.appender.FILE">org.apache.log4j.DailyRollingFileAppender</prop>
+		<prop name="log4j.appender.FILE.Append">true</prop>
+		<prop name="log4j.appender.FILE.Threshold">TRACE</prop>
+		<prop name="log4j.appender.FILE.MaxFileSize">1000MB</prop>
+		<prop name="log4j.appender.FILE.MaxBackupIndex">30</prop>
+		<prop name="log4j.appender.FILE.layout">org.apache.log4j.PatternLayout</prop>
+		<prop name="log4j.appender.FILE.layout.ConversionPattern">[%d{DATE} %c %t %-5p]- %m%n%n</prop>
+
+		<!-- Change the log file Name to something meaningful -->
+		<prop name="log4j.appender.FILE.file">${dirs/log4j/logDir}/@ID@-service1.log</prop>
+
+		<!-- should use this appender, FILE for EJB 2 -->
+		<!-- <prop name="log4j.appender.EJB2">org.apache.log4j.DailyRollingFileAppender</prop> 
+			<prop name="log4j.appender.EJB2.Append">true</prop> <prop name="log4j.appender.EJB2.Threshold">TRACE</prop> 
+			<prop name="log4j.appender.EJB2.layout">org.apache.log4j.PatternLayout</prop> 
+			<prop name="log4j.appender.EJB2.layout.ConversionPattern">[%d{DATE} %c %t 
+			%-5p]- %m%n%n</prop> <prop name="log4j.appender.EJB2.file">${dirs/log4j/logDir}/@ID@-service2.log</prop> -->
+
+		<!-- should use this appender, WEBSERV for web services -->
+		<prop name="log4j.appender.WEBSERV">org.apache.log4j.DailyRollingFileAppender</prop>
+		<prop name="log4j.appender.WEBSERV.Append">true</prop>
+		<prop name="log4j.appender.WEBSERV.Threshold">TRACE</prop>
+		<prop name="log4j.appender.WEBSERV.layout">org.apache.log4j.PatternLayout</prop>
+		<prop name="log4j.appender.WEBSERV.layout.ConversionPattern">[%d{DATE} %c %t %-5p]- %m%n%n</prop>
+
+		<!-- If you have an app of multiple version, make sure you include a config 
+			file (like below) that have the version number so the log file will be unique 
+			<prop name="app_version">_v1_1_vs0</prop> <prop name="log4j.appender.WEBSERV.file">${dirs/log4j/logDir}/@ID@-webservice${app_version}.log</prop> -->
+		<prop name="log4j.appender.WEBSERV.file">${dirs/log4j/logDir}/${fw_appId}-webservice.log</prop>
+
+		<!-- should customize the package names for EJB and web services to go 
+			to different appender -->
+		<!-- <prop name="log4j.logger.com.telus.yourejb1">${log4j/severity/threshold}, 
+			FILE </prop> <prop name="log4j.logger.com.telus.yourwebserv">${log4j/severity/threshold}, 
+			WEBSERV </prop> <prop name="log4j.logger.com.telus.yourejb2">${log4j/severity/threshold}, 
+			EJB2 </prop> -->
+		<prop name="log4j.logger.java.sql">${log4j/severity/threshold}, FILE</prop>
+		<prop name="log4j.logger.org.springframework.web.filter">${log4j/severity/threshold}</prop>
+
+
+	</group>
+</group>
